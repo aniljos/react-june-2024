@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Message from './components/Message';
+import Counter from './components/Counter';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -21,8 +23,14 @@ function App() {
         </a>
       </header>
       <main>
-        <Message text="hello" color='red'/>
+        {/* <Message text="hello" color='red'/>
         <Message text="welcome"/>
+        <Counter initialValue={5}/>
+        <Counter initialValue={15}/> */}
+
+      <Counter initialValue={5}/>
+        {/* <Login/> */}
+
       </main>
     </div>
   );
