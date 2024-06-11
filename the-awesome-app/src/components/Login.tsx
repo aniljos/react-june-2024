@@ -1,5 +1,6 @@
 import {useRef, useEffect, useState, ChangeEvent} from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function Login(){
 
@@ -7,12 +8,17 @@ function Login(){
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const navigate = useNavigate();
 
     //useEffect(callback, [dependencies]);
     useEffect(() => {
 
         console.log("component mounted");
         userNameRef.current?.focus();
+
+        return () => {
+            console.log("component unmounted");
+        }
 
     }, []);
 
@@ -34,6 +40,7 @@ function Login(){
                 const response = await axios.post(url, {name: userName, password});
                 console.log("success", response);
                 setMessage("");
+                navigate("/counter");
 
             } catch (error) {
                  console.log("error", error);
@@ -63,7 +70,7 @@ function Login(){
             <h4>Login</h4>
             {message ? <div style={{border: "1px solid red"}}>{message}</div> : null}
 
-            <form>
+            <form onSubmit={handleLogin}>
                 <div>
                     <label htmlFor="name">UserName</label>
                     <input ref={userNameRef} type="text" 

@@ -1,38 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
 import Message from './components/Message';
 import Counter from './components/Counter';
 import Login from './components/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
+import ListProducts from './components/ListProducts';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <main>
-        {/* <Message text="hello" color='red'/>
-        <Message text="welcome"/>
-        <Counter initialValue={5}/>
-        <Counter initialValue={15}/> */}
+    <Router>
+      <div className='container-fluid'>
+        <nav className="navbar navbar-dark bg-dark">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="/">Navbar</a>
+            <ul className="nav">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/counter">Counter</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">Login</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/products">Products</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
-      {/* <Counter initialValue={5}/> */}
-        <Login/>
-
-      </main>
-    </div>
+        <main>
+            <Routes>
+              <Route path='/' element={<Message text='HelloReact'/>}></Route>
+              <Route path='/counter' element={<Counter initialValue={10}/>}></Route>
+              <Route path='/login' element={<Login/>}></Route>
+              <Route path='/products' element={<ListProducts/>}></Route>
+            </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
