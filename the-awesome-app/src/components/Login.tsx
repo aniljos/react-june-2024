@@ -1,6 +1,7 @@
 import {useRef, useEffect, useState, ChangeEvent} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 function Login(){
 
@@ -9,6 +10,7 @@ function Login(){
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //useEffect(callback, [dependencies]);
     useEffect(() => {
@@ -24,6 +26,7 @@ function Login(){
 
     async function handleLogin(){
 
+        //const uname =  userNameRef.current?.value
         if(userName && password){
             //API call
             const url = "http://localhost:9000/login";
@@ -39,12 +42,19 @@ function Login(){
             try {
                 const response = await axios.post(url, {name: userName, password});
                 console.log("success", response);
+                dispatch({type: "login", payload: {
+                    userName: userName,
+                    accessToken: response.data.accessToken,
+                    refreshToken: response.data.refreshToken
+                
+                }});
                 setMessage("");
                 navigate("/counter");
 
             } catch (error) {
                  console.log("error", error);
                  setMessage("Invalid credentials");
+                 dispatch({type: "logout"});
             }
 
 
@@ -71,19 +81,19 @@ function Login(){
             {message ? <div style={{border: "1px solid red"}}>{message}</div> : null}
 
             <form onSubmit={handleLogin}>
-                <div>
+                <div className='form-group'>
                     <label htmlFor="name">UserName</label>
-                    <input ref={userNameRef} type="text" 
+                    <input className='form-control' ref={userNameRef} type="text" 
                             id="name" placeholder="UserName" value={userName}  onChange={handleUserName}/>
                 </div>
 
-                <div>
+                <div className='form-group'>
                     <label htmlFor="password">Password</label>
-                    <input type="password" id="password" placeholder="*******" 
+                    <input className='form-control' type="password" id="password" placeholder="*******" 
                             value={password} onChange={handlePassword}/>
                 </div>
                 <div>
-                    <button type="button" onClick={handleLogin}>Login</button>
+                    <button className='btn btn-primary' type="button" onClick={handleLogin}>Login</button>
                 </div>
             </form>
         </div>
