@@ -31,8 +31,9 @@ function ListProducts(){
 
         try {
             
-            const headers = {Authorization: `Bearer ${auth.accessToken}`};
-            const response = await axios.get<Array<Product>>(baseUrl, {headers});
+            //const headers = {Authorization: `Bearer ${auth.accessToken}`};
+            //const response = await axios.get<Array<Product>>(baseUrl, {headers});
+            const response = await axios.get<Array<Product>>(baseUrl);
             console.log(response.data);
             setProducts(response.data);
         } catch (error) {
