@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import ListProducts from './components/ListProducts';
 import EditProduct from './components/EditProduct';
+import GadgetStore from './components/GadgetStore';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to="/products">Products</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/gadgets">Gadget Store</Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -39,6 +43,7 @@ function App() {
               <Route path='/login' element={<Login/>}></Route>
               <Route path='/products' element={<ListProducts/>}></Route>
               <Route path='/products/:id' element={<EditProduct/>}></Route>
+              <Route path='/gadgets' element={<GadgetStore/>}></Route>
             </Routes>
         </main>
       </div>
