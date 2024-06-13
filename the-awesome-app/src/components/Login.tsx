@@ -26,7 +26,7 @@ function Login(){
 
     async function handleLogin(){
 
-        debugger;
+      //  debugger;
         //const uname =  userNameRef.current?.value
         if(userName && password){
             //API call
