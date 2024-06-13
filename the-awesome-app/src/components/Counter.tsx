@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { useTitle } from '../hooks/useTitle';
 
 type CounterProps = {
     initialValue?: number
@@ -12,6 +13,7 @@ type CounterProps = {
 const Counter = (props: CounterProps)=> {
 
     const [counter, setCounter] = useState(props.initialValue);
+    useTitle("Counter");
 
     useEffect(() => {
         

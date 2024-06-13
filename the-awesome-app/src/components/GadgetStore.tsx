@@ -5,28 +5,32 @@ import React, {MouseEvent} from 'react';
 import { Product } from "../model/Product";
 import {addToCart as addItemToCart}  from'../redux/gadgetsReducer';
 import { CartItem } from "../model/CartItem";
+import { useAxiosGetProducts } from "../hooks/useAxiosFetchProducts";
 
 const GadgetStore: React.FC = () => {
 
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products] = useAxiosGetProducts();
+    
+
+    //const [products, setProducts] = useState<Product[]>([]);
     const dispatch = useDispatch();
    
-    useEffect(() => {
-        getProducts();
+    // useEffect(() => {
+    //     getProducts();
 
-    }, [])
+    // }, [])
     
-    async function getProducts() {
+    // async function getProducts() {
 
-        try {
-            const response = await axios.get<Product[]>('http://localhost:9000/products');
-            const data = response.data;
-            setProducts(data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    //     try {
+    //         const response = await axios.get<Product[]>('http://localhost:9000/products');
+    //         const data = response.data;
+    //         setProducts(data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     function addToCart(product: Product): void {
        dispatch(addItemToCart(new CartItem(product, 1)));

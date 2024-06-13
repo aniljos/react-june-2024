@@ -19,6 +19,8 @@ const Counter = (props: CounterProps)=> {
     useEffect(() => {
         
         console.log("counter updated", counter);
+        window.dispatchEvent(
+            new CustomEvent('counter-updated', {detail: counter}));
 
     }, [counter])
 

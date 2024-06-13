@@ -9,10 +9,24 @@ const Counter = (props: CounterProps)=> {
     const [counter, setCounter] = useState(props.initialValue);
 
     useEffect(() => {
+        window.addEventListener("counter-updated", onCounterUpdated);
+
+        return () => {
+            window.removeEventListener("counter-updated", onCounterUpdated);
+        }
+    }, []);
+
+    useEffect(() => {
         
         console.log("counter updated", counter);
+        
 
     }, [counter])
+
+    function onCounterUpdated(evt: any){
+        console.log("onCounterUpdated", evt.detail);
+        setCounter(evt.detail);
+    }
 
     function inc(){
         console.log("inc invoked");
