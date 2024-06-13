@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 
 import Message from './components/Message';
 import Counter from './components/Counter';
@@ -8,17 +8,26 @@ import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 
 import EditProduct from './components/EditProduct';
 import GadgetStore from './components/GadgetStore';
+import { AppThemeContext } from './context/AppThemeContext';
 
 //import ListProducts from './components/ListProducts';
 const ListProducts = React.lazy(() => import('./components/ListProducts'));
 
 function App() {
+
+  const theme = useContext(AppThemeContext);
+
+  function switchTheme() {
+
+    theme.setMode && theme.setMode(theme.mode === 'dark' ? 'light' : 'dark')
+  }
+
   return (
 
     <Suspense fallback={<div>Loading...</div>}>
       <Router>
         <div className='container-fluid'>
-          <nav className="navbar navbar-dark bg-dark">
+          <nav className={`navbar navbar-${theme.mode} bg-${theme.mode}`}>
             <div className="container-fluid">
               <a className="navbar-brand" href="/">Navbar</a>
               <ul className="nav">
@@ -36,6 +45,9 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/gadgets">Gadget Store</Link>
+                </li>
+                <li className="nav-item">
+                  <button className='btn btn-warning' onClick={switchTheme}>Switch Theme</button>
                 </li>
               </ul>
             </div>

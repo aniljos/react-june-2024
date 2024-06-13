@@ -42,7 +42,7 @@ const Counter = (props: CounterProps)=> {
         <div>
             <h4>Count: {counter}</h4>
             <div>
-                <button onClick={inc}>Increment</button>&nbsp;
+                <button  onClick={inc}>Increment</button>&nbsp;
                 <button onClick={decr}>Decrement</button>
             </div>
         </div>

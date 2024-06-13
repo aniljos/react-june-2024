@@ -84,7 +84,7 @@ function Login(){
             <form onSubmit={handleLogin}>
                 <div className='form-group'>
                     <label htmlFor="name">UserName</label>
-                    <input className='form-control' ref={userNameRef} type="text" 
+                    <input className='form-control' ref={userNameRef} type="text" aria-label='UserName'
                             id="name" placeholder="UserName" value={userName}  onChange={handleUserName}/>
                 </div>
 
